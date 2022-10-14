@@ -3,6 +3,7 @@
 import numpy as np
 from sklearn import linear_model
 import matplotlib.pyplot as plt
+import math
 
 model = linear_model.LogisticRegression()
 
@@ -25,6 +26,9 @@ model.fit(X, y)
 
 ###########################
 
-
-plt.scatter(X[:,0],X[:,1] )
-plt.show()
+# I'm not sure what's the best way to justify prediction output. I guess I'll do it by calculating the output manually?
+X1 = 3
+X2 = 3
+print(f'obliczone prawdopodobienstwo otrzymania \'1\' dla podanych X1 X2 to: {1/(1 + math.exp(-(X1*-0.39682866 + X2*-0.82497163 + 0.11932619)))}')
+# plt.scatter(X[:,0],X[:,1] )
+# plt.show()
