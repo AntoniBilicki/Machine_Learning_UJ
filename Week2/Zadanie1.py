@@ -1,5 +1,5 @@
 # Zadanie1: Zdefiniuj klasę implementującą regresję liniową z regularyzacją L1/L2 dla dowolnej liczby zmiennych.
-
+import numpy as np
 
 class LinearModel2v:
     def __init__(self, eta=0.001, diff=0.001, w1=1, w2=1, w0=1, maxiter=1000, alfa=0, regression='L1'):
@@ -17,34 +17,44 @@ class LinearModel2v:
         C = 0
         for i in range(N):
             C += (X[i][0] * self.w1 + X[i][1] * self.w2 + self.w0 - t[i]) ** 2
-            # if math.isinf(C) or math.isnan(C):
-            #     breakpoint()
+
+        return C / (2 * N) + self._calc_regularization()
+
+    def _calc_regularization(self):
 
         match self.regression:  # now adding LF+ parameter responsible for regularization
-
             case 'L1':
                 lfp = self.alfa * (abs(self.w1) + abs(self.w2) + abs(self.w0))
             case 'L2':
                 lfp = self.alfa * (self.w1**2 + self.w2**2 + self.w0**2)
             case _:
                 lfp = 0
+        return lfp
 
-        return C / (2 * N) + lfp
+    def _predict_y_hat(self, X):
+
+        #doesnt implement more than two weights but will work for now
+        w = np.array([self.w1, self.w2])
+        X = np.array(X)
+        return list((X*w).sum(axis=1) + self.w0)
+
 
     def update_weights(self, X, t):  # function responsible for updating model weights, will break for large 'eta' values
         N = len(X)
         dC1 = 0
         dC2 = 0
         dC0 = 0
+        y_hat = self._predict_y_hat(X)
         for i in range(N):
-            y_pred = X[i][0] * self.w1 + X[i][1] * self.w2 + self.w0
-            dC1 += 2 * X[i][0] * (y_pred - t[i])
-            dC2 += 2 * X[i][1] * (y_pred - t[i])
-            dC0 += 2 * (y_pred - t[i])
+            dC1 += 2 * X[i][0] * (y_hat[i] - t[i])
+            dC2 += 2 * X[i][1] * (y_hat[i] - t[i])
+            dC0 += 2 * (y_hat[i] - t[i])
 
-        self.w1 = self.w1 - self.eta * dC1 / (2 * N)
-        self.w2 = self.w2 - self.eta * dC2 / (2 * N)
-        self.w0 = self.w0 - self.eta * dC0 / (2 * N)
+        #wasnt sure if I should recalculate lf as I go or use a static value. Decided to go with 2nd approach
+        lf = self._calc_regularization()
+        self.w1 = self.w1 - self.eta * (dC1 / (2 * N) + lf)
+        self.w2 = self.w2 - self.eta * (dC2 / (2 * N) + lf)
+        self.w0 = self.w0 - self.eta * (dC0 / (2 * N) + lf)
 
         # if self.w1 > 1e100:
         #     breakpoint()
