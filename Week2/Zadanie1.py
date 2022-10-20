@@ -54,7 +54,7 @@ class LinearModel2v:
         lf = self._calc_regularization()
         self.w1 = self.w1 - self.eta * (dC1 / (2 * N) + lf)
         self.w2 = self.w2 - self.eta * (dC2 / (2 * N) + lf)
-        self.w0 = self.w0 - self.eta * (dC0 / (2 * N) + lf)
+        self.w0 = self.w0 - self.eta * (dC0 / (2 * N) + lf)`
 
         # if self.w1 > 1e100:
         #     breakpoint()
