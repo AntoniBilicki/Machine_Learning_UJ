@@ -59,9 +59,9 @@ class Momentum(Optimizer):
 
 
 
-#visualize_optimizer(GradientDescent, n_steps=20, learning_rate=0.1, title='Za mały LR')
 
-visualize_optimizer(Momentum, n_steps=20, learning_rate=0.05, gamma=0.8)
-plt.show()
+
+# visualize_optimizer(Momentum, n_steps=20, learning_rate=0.05, gamma=0.8)
+# plt.show()
 
 

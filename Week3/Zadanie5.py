@@ -8,13 +8,15 @@ import numpy as np
 from typing import List
 
 
-class Adagrad(Optimizer):
+class RMSProp(Optimizer):
 
-    def __init__(self, initial_params, learning_rate, epsilon):
+    def __init__(self, initial_params, learning_rate, gamma, epsilon):
         super().__init__(initial_params)
         self.learning_rate = learning_rate
+        self.gamma = gamma
         self.epsilon = epsilon
-        self.gt = torch.zeros_like(self.params[0])
+        self.ht = torch.zeros_like(self.params[0])
+
         self.gradMemory = []
 
         for param in self.params:
@@ -24,13 +26,11 @@ class Adagrad(Optimizer):
     def step(self):
         for param in self.params:
             self.gradMemory.append(torch.pow(param.grad, 2))
-            self.gt = torch.sum(torch.stack(self.gradMemory), dim=0)
-            param -= (self.learning_rate/(self.gt + self.epsilon)**0.5) * param.grad
+            self.ht = self.gamma*self.ht + (1-self.gamma)*torch.pow(param.grad, 2)
+            param -= (self.learning_rate / (self.ht + self.epsilon) ** 0.5) * param.grad
 
 
 
-
-#test_optimizer(Adagrad)
-visualize_optimizer(Adagrad, n_steps=20, learning_rate=1.0, epsilon=1e-8)
+visualize_optimizer(RMSProp, n_steps=10, learning_rate=0.5, gamma=0.9, epsilon=1e-8)
 plt.show()
 
