@@ -53,7 +53,7 @@ class Momentum(Optimizer):
 
     @torch.no_grad()
     def step(self):
-        for idx, param in enumerate(self.params):
+        for param in self.params:
             self.oldUpdtVec = self.gamma*self.oldUpdtVec + self.learning_rate * param.grad
             param -= self.gamma*self.oldUpdtVec + self.learning_rate * param.grad
 
