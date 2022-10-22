@@ -1,4 +1,4 @@
-# Zadanie3: Uzupełnij definicję poniżej klasy.
+# Zadanie3: Uzupełnij definicję poniżej klasy (Momentum).
 import matplotlib.pyplot as plt
 import torch
 from utils import visualize_optimizer
