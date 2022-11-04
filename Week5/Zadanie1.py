@@ -56,24 +56,20 @@ LABEL_COLOR_MAP = {0: 'r',
                    2: 'b',
                    3: 'g'}
 
-label_color = [LABEL_COLOR_MAP[l] for l in A.y]
-plt.scatter(X[:, 0], X[:, 1], c=label_color)
+plt.scatter(X[:, 0], X[:, 1], c=[LABEL_COLOR_MAP[l] for l in A.y])
 plt.show()
 
 A.classify_radius(A.data, A.density)
 
-label_color = [LABEL_COLOR_MAP[l] for l in A.y]
-plt.scatter(X[:, 0], X[:, 1], c=label_color)
+plt.scatter(X[:, 0], X[:, 1], c=[LABEL_COLOR_MAP[l] for l in A.y])
 plt.show()
 
 A.classify_radius(A.data, A.density)
 
-label_color = [LABEL_COLOR_MAP[l] for l in A.y]
-plt.scatter(X[:, 0], X[:, 1], c=label_color)
+plt.scatter(X[:, 0], X[:, 1], c=[LABEL_COLOR_MAP[l] for l in A.y])
 plt.show()
 
 A.classify_radius(A.data, A.density)
 
-label_color = [LABEL_COLOR_MAP[l] for l in A.y]
-plt.scatter(X[:, 0], X[:, 1], c=label_color)
+plt.scatter(X[:, 0], X[:, 1], c=[LABEL_COLOR_MAP[l] for l in A.y])
 plt.show()
