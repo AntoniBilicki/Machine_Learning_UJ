@@ -30,10 +30,10 @@ class mountain_clustering:
             density_score = 0
             for sub_idx, ele in enumerate(x[:,0]):
                 distance = (math.dist((x[main_idx, 0], x[main_idx, 1]), (x[sub_idx, 0], x[sub_idx, 1])))
-                if distance < radius & y[sub_idx] != 0:
+                if distance < radius and y[sub_idx] == 0:
                     density_score += 1
             density.append(density_score)
-            return density
+        return density
 
     def classify_radius(self, x, density):
         """Classifies samples around the most dense point based on radius"""
@@ -46,13 +46,27 @@ class mountain_clustering:
                 distance = math.dist((x[dense_idx, 0], x[dense_idx, 1]), (x[idx, 0], x[idx, 1]))
                 if distance < self.radius:
                     self.y[idx] = self.currentCluster
+        self.density = self.calculate_density(self.data, self.y, self.radius)
 
 
 A = mountain_clustering(X, 4)
 
 LABEL_COLOR_MAP = {0: 'r',
                    1: 'k',
-                   2: 'b'}
+                   2: 'b',
+                   3: 'g'}
+
+label_color = [LABEL_COLOR_MAP[l] for l in A.y]
+plt.scatter(X[:, 0], X[:, 1], c=label_color)
+plt.show()
+
+A.classify_radius(A.data, A.density)
+
+label_color = [LABEL_COLOR_MAP[l] for l in A.y]
+plt.scatter(X[:, 0], X[:, 1], c=label_color)
+plt.show()
+
+A.classify_radius(A.data, A.density)
 
 label_color = [LABEL_COLOR_MAP[l] for l in A.y]
 plt.scatter(X[:, 0], X[:, 1], c=label_color)
