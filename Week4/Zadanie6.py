@@ -46,13 +46,13 @@ real_count, real_set = zip(*sorted(zip(real_count, real_set), reverse=True))
 fake_count, fake_set = zip(*sorted(zip(fake_count, fake_set), reverse=True))
 
 #plot data
-# plt.subplot(2, 1, 1)
-# plt.bar(real_set[:20], real_count[:20])
-# plt.title('Top 20 word occurrences in real news headlines')
-# plt.subplot(2, 1, 2)
-# plt.bar(fake_set[:20], fake_count[:20])
-# plt.title('Top 20 word occurrences in fake news headlines')
-# plt.show()
+plt.subplot(2, 1, 1)
+plt.bar(real_set[:20], real_count[:20])
+plt.title('Top 20 word occurrences in real news headlines')
+plt.subplot(2, 1, 2)
+plt.bar(fake_set[:20], fake_count[:20])
+plt.title('Top 20 word occurrences in fake news headlines')
+plt.show()
 
 # Converting the data into 0,1 vector
 total_set = np.unique(np.append(list(real_set), fake_set))
