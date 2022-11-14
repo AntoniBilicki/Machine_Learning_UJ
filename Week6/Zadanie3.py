@@ -1,9 +1,7 @@
 # Zadanie3: Uzasadnij, że rozmiar wynikowej mapy cech wyraża się poprzez: //see "Zadanie3.png"
 
 import torch.nn as nn
-import torch
 import cv2
-import matplotlib.pyplot as plt
 import torchvision.transforms as transforms
 # Decided that the best way to prove this would be to just compute a map twice with different dimensions
 

@@ -1,6 +1,5 @@
 # Zadanie1: Zaimplementuj filtry Sobela a następnie przetestuj na przykładowej fotografii 1D (odcienie szarości).
 import numpy as np
-from IPython import display
 import matplotlib.pyplot as plt
 import cv2
 import scipy.ndimage as sp
